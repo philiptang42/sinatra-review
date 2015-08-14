@@ -1,0 +1,8 @@
+---
+title: "Grocery List in Sinatra"
+type: "challenge"
+description: "Display and append to a list of groceries via a web application."
+visibility: "assign"
+tags: "sinatra, http"
+ignore:
+- "grocery-list-sinatra.md"
