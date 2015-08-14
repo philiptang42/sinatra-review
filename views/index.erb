@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html lang>
+<html>
   <head>
     <title>Grocery List</title>
   </head>
 
   <body>
-    <h2>Grocery List</h2>
+    <h1>Groceries</h1>
 
     <ul>
       <% groceries.each do |grocery| %>
-        <li><%= grocery %></li>
+      <li>
+            <a href="/groceries/<%= grocery %>"><%= grocery %></a>
+      </li>
       <% end %>
     </ul>
 
     <form action="/groceries" method="post">
-      <label for="grocery">New Grocery:</label>
-      <input type="text" id="grocery" name="grocery" required>
+      <label for="grocery_item">Grocery:</label>
+      <input type="text" id="grocery_item" name="grocery_item" required>
 
-      <label for="quantity">Quantity</label>
-      <input type="number" name="quantity" required>
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" name="quantity" required>
 
-      <input type="submit" value="I will eat this later">
+      <input type="submit" value="Add Grocery">
     </form>
 
   </body>

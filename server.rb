@@ -1,20 +1,40 @@
 require 'sinatra'
+require 'erb'
 
-get '/groceries' do
-  groceries = File.readlines('grocery_list.txt')
-  erb :index, locals: { groceries: groceries }
+def groceries
+  result = []
+  CSV.foreach(grocery_list.csv) do |row|
+    result << row.to_hash
+  end
+  result
 end
 
-post '/groceries' do
-  grocery = params['grocery']
-
-  File.open('grocery_list.txt', 'a') do |file|
-    file.puts(grocery)
-  end
-
+get '/' do
   redirect '/groceries'
 end
 
-post '/groceries/:grocery_name' do
-  erb :individual
+get '/groceries' do
+  groceries = File.readlines('grocery_list.csv')
+	erb :index, locals: { groceries: groceries }
+end
+
+post '/groceries' do
+	  grocery = params['grocery_item']
+	  quantity = params['quantity']
+
+	  File.open('grocery_list.csv', 'a') do |file|
+	    file.puts("#{grocery}")
+	    quantity
+	  end
+
+	  redirect '/'
+  end
+
+get '/groceries/:grocery' do
+  groceries = File.readlines('grocery_list.csv')
+
+
+	erb :individual
+
+
 end
